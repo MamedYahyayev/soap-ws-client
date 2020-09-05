@@ -1,5 +1,6 @@
 package az.maqa.spring.soapclient.config;
 
+import az.maqa.spring.soapclient.client.EmployeeClient;
 import az.maqa.spring.soapclient.client.MovieClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,15 @@ public class SoapClientConfig {
     @Bean
     public MovieClient movieClient(Jaxb2Marshaller marshaller) {
         MovieClient client = new MovieClient();
+        client.setDefaultUri("http://localhost:8088/ws/soap-ws.wsdl");
+        client.setMarshaller(marshaller);
+        client.setUnmarshaller(marshaller);
+        return client;
+    }
+
+    @Bean
+    public EmployeeClient employeeClient(Jaxb2Marshaller marshaller) {
+        EmployeeClient client = new EmployeeClient();
         client.setDefaultUri("http://localhost:8088/ws/soap-ws.wsdl");
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
